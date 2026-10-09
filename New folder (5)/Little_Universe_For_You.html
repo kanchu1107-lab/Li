@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#f7dce9">
+<title>A Little Universe Made Just for You 💗</title>
+<style>
+:root{--pink:#e86f9f;--rose:#bd477c;--purple:#9876e8;--ink:#51384d;--glass:rgba(255,255,255,.84)}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;min-height:100vh;font-family:"Segoe UI",Arial,sans-serif;color:var(--ink);background:linear-gradient(135deg,#ffe8f0,#eee4ff 52%,#e2f7ff);overflow-x:hidden}
+button{font:inherit;cursor:pointer;border:0}
+button:focus-visible{outline:3px solid #7c5ad7;outline-offset:3px}
+#ambient{position:fixed;inset:0;overflow:hidden;pointer-events:none;z-index:0}
+.float{position:absolute;bottom:-60px;animation:rise linear infinite;opacity:.65}
+@keyframes rise{to{transform:translateY(-115vh) rotate(360deg);opacity:0}}
+header{position:fixed;top:12px;right:12px;z-index:20;display:flex;gap:8px}
+.pill{border-radius:999px;padding:10px 14px;background:#ffffffdf;color:#9f4c78;box-shadow:0 4px 18px #7d50751c;font-weight:700}
+main{position:relative;z-index:1;width:min(920px,92%);margin:auto;padding:34px 0}
+.screen{display:none;min-height:calc(100vh - 68px);align-items:center;justify-content:center;animation:fade .55s ease}
+.screen.active{display:flex}
+@keyframes fade{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.card{width:100%;text-align:center;padding:clamp(24px,5vw,44px);border:1px solid #ffffffc9;border-radius:30px;background:var(--glass);backdrop-filter:blur(12px);box-shadow:0 20px 60px #79517d20}
+h1{font-size:clamp(2.4rem,8vw,4.6rem);line-height:1.05;color:var(--rose);margin:10px 0 18px}
+h2{font-size:clamp(1.7rem,5vw,2.7rem);color:#bd527f;margin:8px 0 18px}
+h3{font-size:1.2rem;color:#955477;line-height:1.5}
+p{font-size:1.06rem;line-height:1.8;margin:10px 0}
+.eyebrow{letter-spacing:.14em;text-transform:uppercase;font-size:.76rem;font-weight:800;color:#a05c92}
+.big-emoji{font-size:clamp(3rem,9vw,5.5rem);filter:drop-shadow(0 8px 12px #d986b544)}
+.sub{font-size:1.18rem;max-width:690px;margin:15px auto 24px}
+.primary,.secondary{padding:13px 22px;border-radius:999px;margin:8px 5px;font-weight:800;transition:.2s}
+.primary{color:white;background:linear-gradient(120deg,#e66b9d,#9e7be8);box-shadow:0 8px 22px #d26c9c40}
+.secondary{color:#a14d79;background:#fff;border:1px solid #f0c8dc}
+.primary:hover,.secondary:hover{transform:translateY(-2px)}
+.photo{width:min(230px,65vw);height:min(230px,65vw);object-fit:cover;border-radius:50%;border:7px solid white;box-shadow:0 12px 35px #c76e9b40;margin:15px auto}
+.note{font-size:.87rem;opacity:.72}
+.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:22px 0}
+.choice{background:#fff;border:2px solid #f0c8dc;border-radius:18px;padding:16px 12px;color:#67425b;font-weight:700;line-height:1.45;transition:.2s}
+.choice:hover{background:#fff5fa;transform:translateY(-2px);border-color:#df91b7}
+.feedback{display:none;margin:18px auto 8px;padding:18px;border-radius:18px;background:linear-gradient(120deg,#fff0f6,#f1edff);line-height:1.75}
+.progress{height:6px;background:#f2dce8;border-radius:99px;overflow:hidden;margin:0 0 24px}
+.progress span{display:block;height:100%;background:linear-gradient(90deg,#ee76a6,#9d7be9)}
+.door-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px;margin:24px 0}
+.door{min-height:115px;border-radius:20px;padding:15px 8px;background:linear-gradient(145deg,#fff,#f9e7f4);border:1px solid #f0c8df;color:#754568;font-weight:800;box-shadow:0 7px 20px #9d6a9220}
+.door span{display:block;font-size:2rem;margin-bottom:8px}
+.door small{font-size:.78rem;font-weight:600}
+.jar{font-size:4rem;display:inline-block;animation:bob 2.5s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) rotate(3deg)}}
+.note-paper{max-width:600px;margin:18px auto;padding:24px;background:#fffaf0;border-radius:8px 22px 8px 22px;box-shadow:0 8px 25px #7b56751a;font-size:1.12rem;line-height:1.8;min-height:100px}
+.counter{font-weight:800;color:#a85b85;margin:8px}
+.heart-area{height:250px;position:relative;overflow:hidden;border-radius:22px;background:linear-gradient(150deg,#fff0f7,#ece6ff);border:1px solid #f1cde1;margin:20px 0}
+.catch-heart{position:absolute;font-size:2rem;background:none;padding:0;animation:heartPop 1.3s ease-in-out infinite alternate}
+@keyframes heartPop{to{transform:scale(1.18) rotate(8deg)}}
+.star-sky{position:relative;min-height:310px;border-radius:22px;overflow:hidden;background:radial-gradient(ellipse at 50% 110%,#6d4e9e,#241b4d 75%);margin:22px 0;padding:18px}
+.star{position:absolute;background:none;color:#fff2a8;font-size:2rem;text-shadow:0 0 15px #fff6b0;animation:twinkle 1.5s infinite alternate}
+@keyframes twinkle{to{opacity:.45;transform:scale(.8)}}
+.star-message{display:none;color:white;background:#ffffff1c;border:1px solid #ffffff55;border-radius:16px;padding:15px;margin:10px auto;max-width:560px;line-height:1.7}
+.gallery{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin:20px 0}
+.gallery figure{margin:0;padding:10px;border-radius:18px;background:white;box-shadow:0 5px 20px #8b5a8020}
+.gallery img{width:100%;height:170px;object-fit:cover;border-radius:12px}
+.gallery figcaption{font-size:.9rem;line-height:1.5;padding:8px 3px}
+.teddy{font-size:6rem;display:block;animation:bob 2s infinite}
+.final-letter{text-align:left;background:#fffafc;border-radius:22px;padding:clamp(18px,4vw,30px);line-height:1.9}
+.final-letter p{margin:0 0 14px}
+.signature{text-align:right;color:#bd527f;font-weight:800;font-size:1.1rem}
+#toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#fff;color:#a34e7c;padding:12px 18px;border-radius:999px;box-shadow:0 8px 30px #5b3b5c25;z-index:50;display:none;max-width:90%;text-align:center}
+.confetti{position:fixed;top:-25px;z-index:60;pointer-events:none;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(700deg);opacity:.2}}
+@media(max-width:620px){.grid{grid-template-columns:1fr}.door-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.gallery{grid-template-columns:1fr}.gallery img{height:220px}.card{border-radius:24px}.door{min-height:100px}}
+</style>
+</head>
+<body>
+<div id="ambient" aria-hidden="true"></div>
+<header>
+  <button class="pill" id="musicToggle" onclick="toggleMusic()" style="display:none">🎵 Music on</button>
+  <button class="pill" onclick="showToast('A little universe made especially for you. 💗')">💌</button>
+</header>
+<audio id="song" loop><source src="song.mp3" type="audio/mpeg"></audio>
+<main>
+
+<section class="screen active" id="s1"><div class="card">
+  <div class="big-emoji">🌙 💗 ✨</div><div class="eyebrow">A tiny universe, made with love</div>
+  <h1>Hey, Beautiful</h1>
+  <p class="sub">I made a little world just for you — with smiles, silly games, sweet notes, stars, and a few things I wanted you to hear.</p>
+  <p>Ready to explore your very own universe? 🌷</p>
+  <button class="primary" onclick="startExperience()">Open your little universe 💖</button>
+  <p class="note">Put your photo and song beside this HTML file to personalise it.</p>
+</div></section>
+
+<section class="screen" id="s2"><div class="card">
+  <div class="big-emoji">🌸</div><h2>A little place for you</h2>
+  <img class="photo" src="Liza.jpg" alt="Your favourite photo" onerror="this.style.display='none';document.getElementById('photoFallback').style.display='block'">
+  <div id="photoFallback" style="display:none" class="note-paper">📸 Your photo will appear here when you add a file named <b>Liza.jpg</b>.</div>
+  <p>Not because a webpage can say everything, but because sometimes a small surprise can make an ordinary day feel a little brighter.</p>
+  <button class="primary" onclick="go('s3')">Let's explore 💕</button>
+</div></section>
+
+<section class="screen" id="s3"><div class="card">
+  <div class="eyebrow">Room one · the love arcade</div><h2>A tiny question 💗</h2>
+  <div class="progress"><span style="width:15%"></span></div>
+  <h3>What makes a conversation feel special?</h3>
+  <div class="grid">
+    <button class="choice" onclick="quiz(this,'The little details — they show how much we notice and appreciate each other. 🌷')">Remembering little details 🌷</button>
+    <button class="choice" onclick="quiz(this,'Laughing together makes even an ordinary day feel lighter. 😂')">Laughing at silly things 😂</button>
+    <button class="choice" onclick="quiz(this,'Feeling listened to and understood is a beautiful kind of closeness. 💗')">Feeling understood 💗</button>
+    <button class="choice" onclick="quiz(this,'All of these. The best conversations can be funny, thoughtful, and comforting at once. ❤️')">All of these ❤️</button>
+  </div>
+  <div class="feedback"></div><button class="primary next" style="display:none" onclick="go('s4')">Next little adventure ✨</button>
+</div></section>
+
+<section class="screen" id="s4"><div class="card">
+  <div class="eyebrow">Room two · catch the hearts</div><h2>Catch 5 hearts! 💘</h2>
+  <p>Tap the floating hearts. Each one carries a tiny reminder.</p>
+  <div class="counter" id="heartCount">Hearts collected: 0 / 5</div>
+  <div class="heart-area" id="heartArea" aria-label="Heart collecting game"></div>
+  <div class="feedback" id="heartFeedback"></div>
+  <button class="primary" id="heartNext" style="display:none" onclick="go('s5')">Unlock the love notes 💌</button>
+</div></section>
+
+<section class="screen" id="s5"><div class="card">
+  <div class="eyebrow">Room three · the love-note jar</div><h2>Pick a little note 💌</h2>
+  <div class="jar">🫙</div>
+  <p>Choose the kind of note you need right now.</p>
+  <div class="grid">
+    <button class="choice" onclick="drawNote('romance')">💕 A romantic note</button>
+    <button class="choice" onclick="drawNote('funny')">😂 Make me laugh</button>
+    <button class="choice" onclick="drawNote('comfort')">🫂 A comforting note</button>
+    <button class="choice" onclick="drawNote('motivation')">🌟 A little motivation</button>
+  </div>
+  <div class="note-paper" id="notePaper">Your note is waiting here. Tap a button to open it. 💗</div>
+  <div class="counter" id="noteCounter">Notes discovered: 0 / 12</div>
+  <button class="secondary" onclick="drawRandomNote()">Surprise me 🎀</button>
+  <button class="primary" onclick="go('s6')">Visit the starry sky 🌌</button>
+</div></section>
+
+<section class="screen" id="s6"><div class="card">
+  <div class="eyebrow">Room four · the starry universe</div><h2>Tap the glowing stars ✨</h2>
+  <p>Each star has a little wish or reminder. Find all five.</p>
+  <div class="star-sky" id="starSky">
+    <button class="star" style="left:12%;top:15%" onclick="openStar(0,this)" aria-label="Star one">✦</button>
+    <button class="star" style="left:43%;top:28%" onclick="openStar(1,this)" aria-label="Star two">✧</button>
+    <button class="star" style="left:76%;top:12%" onclick="openStar(2,this)" aria-label="Star three">✦</button>
+    <button class="star" style="left:25%;top:62%" onclick="openStar(3,this)" aria-label="Star four">✧</button>
+    <button class="star" style="left:69%;top:68%" onclick="openStar(4,this)" aria-label="Star five">✦</button>
+    <div class="star-message" id="starMessage"></div>
+  </div>
+  <div class="counter" id="starCount">Stars discovered: 0 / 5</div>
+  <button class="primary" onclick="go('s7')">Visit the memory museum 📸</button>
+</div></section>
+
+<section class="screen" id="s7"><div class="card">
+  <div class="eyebrow">Room five · the memory museum</div><h2>Little moments, big feelings 📸</h2>
+  <p>Add your favourite photos to turn this into a personal scrapbook. The captions can be edited to match your story.</p>
+  <div class="gallery">
+    <figure><img src="memory1.jpg" alt="Memory one" onerror="this.style.display='none';this.nextElementSibling.textContent='📷 Add memory1.jpg to show a favourite photo.'"><figcaption>A little moment I want to remember. 💗</figcaption></figure>
+    <figure><img src="memory2.jpg" alt="Memory two" onerror="this.style.display='none';this.nextElementSibling.textContent='📷 Add memory2.jpg to show another photo.'"><figcaption>A smile worth saving. 🌸</figcaption></figure>
+    <figure><img src="memory3.jpg" alt="Memory three" onerror="this.style.display='none';this.nextElementSibling.textContent='📷 Add memory3.jpg to show another photo.'"><figcaption>A memory that makes me smile. ✨</figcaption></figure>
+    <figure><img src="memory4.jpg" alt="Memory four" onerror="this.style.display='none';this.nextElementSibling.textContent='📷 Add memory4.jpg to show another photo.'"><figcaption>More chapters still to come. 🌷</figcaption></figure>
+  </div>
+  <button class="primary" onclick="go('s8')">Emergency hug, please! 🧸</button>
+</div></section>
+
+<section class="screen" id="s8"><div class="card">
+  <div class="eyebrow">Room six · virtual hug machine</div><h2>Hug delivery service 🧸</h2>
+  <span class="teddy" id="teddy">🧸💗</span>
+  <p>Choose the size of the hug you need today.</p>
+  <div class="grid">
+    <button class="choice" onclick="hug(1)">A little hug 🫂</button>
+    <button class="choice" onclick="hug(2)">A big hug 🤗</button>
+    <button class="choice" onclick="hug(3)">The biggest hug ever 💞</button>
+    <button class="choice" onclick="hug(4)">Hug + extra cuddles 🥹</button>
+  </div>
+  <div class="feedback" id="hugMessage"></div>
+  <button class="primary" onclick="go('s9')">Open the secret room 🔐</button>
+</div></section>
+
+<section class="screen" id="s9"><div class="card">
+  <div class="big-emoji">🔐 💗</div><div class="eyebrow">The secret room</div>
+  <h2>One last little puzzle</h2>
+  <p>Finish this tiny equation to open your final message.</p>
+  <h3 style="font-size:2rem;margin:25px">Kindness + Laughter + Care = ?</h3>
+  <div class="grid">
+    <button class="choice" onclick="secretAnswer()">A lovely connection 💗</button>
+    <button class="choice" onclick="secretAnswer()">More happy memories 🌷</button>
+    <button class="choice" onclick="secretAnswer()">Something worth appreciating ❤️</button>
+    <button class="choice" onclick="secretAnswer()">All of these ✨</button>
+  </div>
+  <div class="feedback" id="secretFeedback"></div>
+  <button class="primary" id="finalDoor" style="display:none" onclick="go('s10')">Open your final letter 💌</button>
+</div></section>
+
+<section class="screen" id="s10"><div class="card">
+  <div class="big-emoji">💗🌹✨</div><div class="eyebrow">Made with care, just for you</div>
+  <h1>A little letter</h1>
+  <div class="final-letter">
+    <p>Hey, beautiful. ❤️</p>
+    <p>If you've made it this far, I hope this little universe has given you a few smiles. I wanted to make something more personal than a simple message — a place with a little laughter, a little magic, and reminders that you deserve kindness and care.</p>
+    <p>You don't have to be perfect. You don't have to have every answer. You can have difficult days, change your mind, chase big dreams, take breaks, laugh at silly things, and be completely yourself.</p>
+    <p>I hope you never forget that your happiness matters, your dreams matter, and the little things that make you who you are deserve to be appreciated. I hope life gives you plenty of reasons to laugh, people who treat you gently, and moments that make you proud of yourself.</p>
+    <p>And when you need a reminder, come back to this tiny world. Pick a note, catch a heart, visit the stars, or simply take a breath and remember: you deserve good things, not just on your best days, but on the ordinary ones too. 🌷</p>
+    <p>Thank you for being part of this little adventure. Here's to more laughter, more stories, more kind moments, and memories still waiting to happen. 💕</p>
+    <p class="signature">A little universe, made with love. 💖</p>
+  </div>
+  <button class="primary" onclick="celebrate()">Make the sky sparkle 🎉</button>
+  <button class="secondary" onclick="go('s1')">Visit again ↺</button>
+</div></section>
+
+</main>
+<div id="toast" role="status" aria-live="polite"></div>
+<script>
+const $ = id => document.getElementById(id);
+function showToast(text){const t=$('toast');t.textContent=text;t.style.display='block';clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>t.style.display='none',2600)}
+function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));$(id).classList.add('active');window.scrollTo({top:0,behavior:'smooth'})}
+function startExperience(){const a=$('song');a.play().then(()=>{$('musicToggle').textContent='🎵 Music on'}).catch(()=>{$('musicToggle').textContent='🎵 Play music'});$('musicToggle').style.display='block';go('s2')}
+function toggleMusic(){const a=$('song');if(a.paused){a.play().then(()=>$('musicToggle').textContent='🎵 Music on').catch(()=>showToast('Add song.mp3 beside the HTML file first. 🎵'))}else{a.pause();$('musicToggle').textContent='🔇 Music off'}}
+function quiz(btn,message){const box=btn.parentElement;box.querySelectorAll('button').forEach(b=>b.style.opacity='.55');btn.style.opacity='1';const feedback=box.nextElementSibling;feedback.textContent=message;feedback.style.display='block';box.parentElement.querySelector('.next').style.display='inline-block'}
+const ambient=$('ambient');['💗','💕','✦','🌸','✨','♡'].forEach((symbol,j)=>{for(let i=0;i<5;i++){const e=document.createElement('span');e.className='float';e.textContent=symbol;e.style.left=Math.random()*100+'%';e.style.fontSize=(14+Math.random()*20)+'px';e.style.animationDuration=(8+Math.random()*10)+'s';e.style.animationDelay=(Math.random()*12)+'s';ambient.appendChild(e)}});
+let caught=0;const heartMessages=['A little reminder: you deserve kindness. 💗','May your day hold a small happy surprise. 🌸','You can take things one step at a time. 🌷','A tiny virtual hug, just for you. 🫂','Keep a little room for laughter today. ✨'];const heartArea=$('heartArea');
+function spawnHeart(){const b=document.createElement('button');b.className='catch-heart';b.textContent=['💗','💖','💕','❤️','💘'][Math.floor(Math.random()*5)];b.style.left=(5+Math.random()*85)+'%';b.style.top=(8+Math.random()*72)+'%';b.setAttribute('aria-label','Collect heart');b.onclick=()=>{if(b.dataset.hit)return;b.dataset.hit='1';b.remove();caught++;$('heartCount').textContent=`Hearts collected: ${caught} / 5`;showToast(heartMessages[caught-1]);if(caught>=5){$('heartFeedback').textContent='You collected all five! Sending a little bundle of good wishes your way. 💖';$('heartFeedback').style.display='block';$('heartNext').style.display='inline-block';clearInterval(heartSpawner)}};heartArea.appendChild(b)}
+let heartSpawner=setInterval(()=>{if(caught<5&&heartArea.querySelectorAll('.catch-heart').length<4)spawnHeart()},850);for(let i=0;i<3;i++)spawnHeart();
+const notes={romance:['Some of the sweetest moments are the simple ones: a good conversation, a shared laugh, and feeling remembered. 💕','A thoughtful little message can turn an ordinary day into a lovely one. 🌹','You deserve affection that feels kind, steady, and sincere. ❤️'],funny:['Official report: this website has detected dangerously high levels of cuteness. Please proceed with a smile. 😂','Breaking news: local human has opened a romantic website and is now legally required to accept one virtual hug. 🫂','You have been promoted to Chief Executive of Being Adorable. Salary: unlimited compliments. 🎀'],comfort:['You do not have to solve everything today. One small step is enough. 🫂','If today feels heavy, take a breath, drink some water, and give yourself a little patience. 🌷','You are allowed to rest. Your worth is not measured by how much you get done. 💗'],motivation:['A difficult day is not the whole story. Keep going at a pace that works for you. 🌟','Your goals deserve a chance. Start small, learn as you go, and give yourself credit for trying. ✨','You can be a work in progress and still be someone worth celebrating. 🌸']};
+let notesSeen=new Set();function drawNote(type){const arr=notes[type];const message=arr[Math.floor(Math.random()*arr.length)];$('notePaper').textContent=message;notesSeen.add(message);$('noteCounter').textContent=`Notes discovered: ${notesSeen.size} / 12`}
+function drawRandomNote(){const keys=Object.keys(notes);drawNote(keys[Math.floor(Math.random()*keys.length)])}
+const starTexts=['I hope you remember the little things you do matter, even when nobody says so. 🌷','May you keep finding things that make you curious, excited, and proud of yourself. ✨','A wish for you: more laughter, restful nights, and kind people around you. 💗','You can change, grow, and take your own path. You do not have to have it all figured out. 🌙','May the future bring you memories that make you smile when you look back. ❤️'];let starsSeen=new Set();function openStar(n,el){starsSeen.add(n);$('starMessage').textContent=starTexts[n];$('starMessage').style.display='block';$('starCount').textContent=`Stars discovered: ${starsSeen.size} / 5`;el.style.color='#ffb4df';if(starsSeen.size===5)showToast('You found all five stars! ✨')}
+function hug(size){const messages={1:'A small, gentle virtual hug for you. 🫂',2:'A big squeeze, with extra warmth included. 🤗',3:'The biggest virtual hug ever — take as long as you need. 💞',4:'Hug, extra cuddles, and a reminder to be gentle with yourself. 🥹'};$('teddy').textContent=size===1?'🧸🤍':size===2?'🧸🫂':size===3?'🧸💖💖':'🧸💕🫂';$('hugMessage').textContent=messages[size];$('hugMessage').style.display='block'}
+function secretAnswer(){$('secretFeedback').textContent='Exactly — kindness, laughter, and care help make meaningful connections. And you deserve all three. ❤️';$('secretFeedback').style.display='block';$('finalDoor').style.display='inline-block'}
+function celebrate(){const symbols=['💗','💕','🌸','✨','💖','🌹','⭐','🎀'];for(let i=0;i<95;i++){const e=document.createElement('span');e.className='confetti';e.textContent=symbols[Math.floor(Math.random()*symbols.length)];e.style.left=Math.random()*100+'vw';e.style.fontSize=(14+Math.random()*22)+'px';e.style.animationDuration=(2+Math.random()*3)+'s';document.body.appendChild(e);setTimeout(()=>e.remove(),5500)}showToast('May your day be full of little moments worth smiling about. 💖')}
+</script>
+</body>
+</html>
